@@ -1,0 +1,318 @@
+
+<!-- <div class="row">
+<div class="col-1"></div>
+<div class="col-8">
+<header id="searchheading" >
+    <br>
+  <h2>SSS UI Dashboard</h2>
+</header>
+</div>
+</div>
+  <br>
+  <div class="row">
+      <div class="col-3"></div>
+      <div class="col-9"><h5>Search PO/Receipt/Item Number</h5></div>
+  </div>
+  <br>
+  <body>   
+        <form id="form1" runat="server">    
+          <div class="row">
+                  
+                  <div class="col-lg-3">
+
+                  </div>
+                <div class="col-lg-4">
+                   <table id="table1" >  
+
+                        <tr> 
+                            <td >Select</td>  
+                            <td></td>  
+                        </tr>
+                        <tr> 
+                                <td >Integration</td>  
+                                <td>
+                                 <label> <input type="radio" value="ccl" name="integration" (change)="onChange('ccl')" /> CCL</label>
+                                 &nbsp; &nbsp;
+                                 <label><input type="radio" value="races" name="integration" (change)="onChange('races')" />RACES</label>
+                                </td>  
+                            </tr>
+                           <tr> 
+                        <tr> 
+                            <td>PO</td>  
+                            <td><input type="text" name="po" [(ngModel)]="po"/></td>  
+                         </tr> 
+    
+                         <tr>  
+                             <td >Receipt</td>  
+                            <td><input type="text" name="receipt" [(ngModel)]="receipt"/></td>  
+                        </tr>  
+                        <tr *ngIf="items_tag">  
+                             <td>Item Number</td>  
+                             <td><input type="text" name="item" [(ngModel)]="item"/></td>  
+                        </tr>  
+                        <tr>  
+                              <td  >From Date</td>  
+                              <td><div>
+                                <ngbd-datepicker-popup></ngbd-datepicker-popup>
+                                </div></td>  
+                        </tr>  
+                        <tr>  
+                             <td >To Date</td>  
+                             <td><div>
+                                <ngbd-datepicker-popup></ngbd-datepicker-popup>
+                                </div></td>  
+                        </tr> 
+            
+                        <tr >
+                             <td>  </td>
+                             <td><input type="button" value="Search" (click)="searchData()"/>  &nbsp; &nbsp; &nbsp; &nbsp; <input type="button" ng-click="reset()" value="Reset" />  </td>  
+                      </tr>  
+            </table>   
+    
+        </div>
+    </div>
+        </form>  
+    </body>  -->
+
+
+
+
+
+    <div class="row">
+            <div class="col-1"></div>
+            <div class="col-8">
+            <header id="searchheading" >
+                <br>
+              <h2>SSS UI Dashboard</h2>
+            </header>
+            </div>
+            </div>
+
+    <div class="row">
+            <div class="col-4"></div>
+            <div class="col-8"><h5>Search PO/Receipt/Item Number</h5></div>
+        </div>
+
+        <div class="row">
+                  
+                <div class="col-lg-4">
+
+                </div>
+              <div class="col-lg-4">
+    <form class="sssui" [formGroup]="myForm">
+
+            <mat-radio-group class="width">
+                    <mat-radio-button value="0"  (change)="onChange('ccl')" [checked]="isChecked">CCL</mat-radio-button>
+                    &nbsp; &nbsp; 
+                    <mat-radio-button value="1"  (change)="onChange('races')">RACES</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <mat-form-field class="width"   >
+                <input matInput placeholder="Enter PO" name="po" [(ngModel)]="po">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="width"  >
+                <input matInput placeholder="Enter Receipt" name="receipt" [(ngModel)]="receipt">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="width"  *ngIf="items_tag"  >
+                <input matInput placeholder="Enter Item Number" name="item" [(ngModel)]="item">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="width">
+                    <input matInput [matDatepicker]="fromdate" placeholder="Choose From date">
+                    <mat-datepicker-toggle matSuffix [for]="fromdate"></mat-datepicker-toggle>
+                    <mat-datepicker #fromdate></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="width">
+                    <input matInput [matDatepicker]="todate" placeholder="Choose To date">
+                    <mat-datepicker-toggle matSuffix [for]="todate"></mat-datepicker-toggle>
+                    <mat-datepicker #todate></mat-datepicker>
+            </mat-form-field >
+            <br>
+            <button mat-flat-button color="primary" (click)="searchData()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-flat-button color="accent">Reset</button>
+  
+    </form>
+
+</div>
+       <!--PO TABLE--> 
+
+  
+
+    <br>
+    <div *ngIf="po_table">
+    <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"><h5>PO Table</h5>
+    </div>
+    </div>
+    <br>
+    
+
+    <div class="row"> 
+    <div class="col-1"></div>
+    <div class="col-11">
+    <table>
+    <tr>
+    <th class="po">PO</th>
+    <th>Rev</th>
+    <th>Date Created </th>
+    <th>Date Last Updated</th>
+    <th>Status</th>
+    <th>Dependency</th>
+    <th>Error</th>
+    <th>Update Status</th>
+    <th>Retransmit</th>
+    </table>
+    </div>
+    </div>
+ </div>
+
+
+    <!--RECEIPT TABLE-->
+
+
+    <br>
+
+<div *ngIf="receipt_table">
+
+<div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-2"><h5>Receipt Table</h5>
+</div>
+</div>
+<br>
+
+<div class="row"> 
+<div class="col-1"></div>
+<div class="col-11">
+<table>
+<tr>
+<th class="receipt">Receipt</th>
+<th>SEQNO</th>
+<th>RTR Status</th>
+<th>Date Created </th>
+<th>Date Last Updated</th>
+<th>Status</th>
+<th>Dependency</th>
+<th>Error</th>
+<th>Update Status</th>
+<th>Retransmit</th>
+</table>
+</div>
+</div>
+
+</div>
+
+<!---ITEMS TABLE-->
+
+<br>
+
+<div *ngIf="item_table">
+<div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-2"><h5>Item Table</h5>
+</div>
+</div>
+<br>
+
+<div class="row"> 
+<div class="col-1"></div>
+<div class="col-11">
+<table>
+<tr>
+<th>Item Number</th>
+<th class="guid">GUID</th>
+<th>Date Created </th>
+<th>Date Last Updated</th>
+<th>Status</th>
+<th>Error</th>
+<th>Update Status</th>
+<th>Retransmit</th>
+</table>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <body>   
+    <form id="form1" runat="server">  
+      
+      <div class="row">
+              <div clas="col-2">  </div>   
+            <div class="col-2">
+                 <select name="list" id="list" >  
+                    <option value="1">CCL</option>  
+                    <option value="2">Races</option>    
+                 </select> 
+            </div>
+            <div class="col-8">
+               <table id="table1" cellspacing="5px" cellpadding="5%" align="center">  
+        
+                     <tr> 
+                         <td align="center">Select</td>  
+                         <td></td>  
+                     </tr>
+                    <tr> 
+                        <td align="center">PO</td>  
+                        <td><input type="text" name="po"/></td>  
+                     </tr>
+
+                     <tr>  
+                         <td align="center">Receipt</td>  
+                        <td><input type="text" name="receipt" /></td>  
+                    </tr>  
+                    <tr>  
+                         <td align="center">Item Number</td>  
+                         <td><input type="text" name="item" /></td>  
+                    </tr>  
+                    <tr>  
+                          <td  align="center">From Date</td>  
+                          <td><input type="text" name="fdate" /></td>  
+                    </tr>  
+                    <tr>  
+                         <td align="center">To Date</td>  
+                         <td><input type="text" name="tdate" /></td>  
+                    </tr>  
+         
+        
+                    <tr align="center">
+                         <td> <input type="button" value="Search" align="right"/>  </td>
+                         <td> <input type="button" value="Reset" />  </td>  
+                  </tr>  
+        </table>   
+
+    </div>
+</div>
+    </form>  
+</body>  -->
+

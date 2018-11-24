@@ -1,0 +1,42 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 85%;
+    border: 1px solid black;
+
+}
+
+td, th {
+    border: 1px solid #1a1414;
+    text-align: left;
+    padding: 5px;
+
+}
+
+th.po {
+    width: 15%;
+    }
+
+th.receipt {
+        width: 10%;
+        }
+
+th.guid {
+        width: 25%;
+        }
+tr:nth-child(even) {
+    background-color: #cacaca;
+}
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.sssui {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .width {
+    width: 70%;
+  }
